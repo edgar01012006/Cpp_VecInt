@@ -2,6 +2,7 @@
 #define VECINT_HPP
 
 #include <iostream>
+#include <utility>
 
 struct VecInt {
 	public:
@@ -9,6 +10,8 @@ struct VecInt {
 		VecInt(size_t size, int val = 0);
 		VecInt(const VecInt& src);
 		VecInt& operator=(const VecInt& rhs);
+		VecInt(VecInt&& src) noexcept;
+		VecInt& operator=(VecInt&& rhs) noexcept;
 		~VecInt();
 
 		void clear();
@@ -24,6 +27,8 @@ struct VecInt {
 
 		void print() const;
 	private:
+		void cleanup() noexcept;
+		void moveFrom(VecInt& src) noexcept;
 		void reserve();
 	private:
 		int* m_data;
