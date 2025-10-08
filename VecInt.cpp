@@ -30,14 +30,20 @@ VecInt& VecInt::operator=(const VecInt& rhs) {
     return *this;
 }
 
-VecInt::VecInt(VecInt&& src) noexcept {
-    moveFrom(src);
+VecInt::VecInt(VecInt&& src) noexcept
+    : m_data { src.m_data }, m_size { src.m_size }, m_capacity { src.m_capacity } {
+    src.m_data = nullptr;
+    src.m_size = src.m_capacity = 0;
 }
 
 VecInt& VecInt::operator=(VecInt&& rhs) noexcept {
     if (this != &rhs) {
-        cleanup();
-        moveFrom(rhs);
+        m_size = rhs.m_size;
+        m_capacity = rhs.m_capacity;
+        delete [] m_data;
+        m_data = rhs.m_data;
+        rhs.m_data = nullptr;
+        rhs.m_size = rhs.m_capacity = 0;
     }
     return *this;
 }
@@ -115,26 +121,4 @@ void VecInt::print() const {
         std::cout << m_data[i] << ' ';
     }
     std::cout << std::endl;
-}
-
-void VecInt::cleanup() noexcept {
-    delete [] m_data;
-    m_data = nullptr;
-    m_size = m_capacity = 0;
-}
-
-void VecInt::moveFrom(VecInt& src) noexcept {
-    m_data = src.m_data;
-    m_size = src.m_size;
-    m_capacity = src.m_capacity;
-
-    src.m_data = nullptr;
-    src.m_size = src.m_capacity = 0;
-
-    /* more compact version */
-    /*
-    m_data = std::exchange(src.m_data, nullptr);
-    m_size = std::exchange(src.m_size, 0);
-    m_capacity = std::exchange(src.m_capacity, 0);
-    */
 }

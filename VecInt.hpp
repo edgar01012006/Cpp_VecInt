@@ -27,8 +27,6 @@ struct VecInt {
 
 		void print() const;
 	private:
-		void cleanup() noexcept;
-		void moveFrom(VecInt& src) noexcept;
 		void reserve();
 	private:
 		int* m_data;
