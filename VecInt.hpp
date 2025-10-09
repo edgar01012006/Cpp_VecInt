@@ -14,6 +14,8 @@ struct VecInt {
 		VecInt& operator=(VecInt&& rhs) noexcept;
 		~VecInt();
 
+		bool operator==(const VecInt& rhs);
+
 		void clear();
 
 		size_t size() const;
