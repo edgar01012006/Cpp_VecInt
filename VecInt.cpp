@@ -132,3 +132,17 @@ bool VecInt::operator==(const VecInt& rhs) {
     }
     return true;
 }   
+
+int& VecInt::operator[](size_t index) {
+    if (index >= m_size) {
+        throw std::out_of_range { "" };
+    }
+    return m_data[index];
+}
+
+const int& VecInt::operator[](size_t index) const {
+    if (index >= m_size) {
+        throw std::out_of_range { "" };
+    }
+    return m_data[index];
+}

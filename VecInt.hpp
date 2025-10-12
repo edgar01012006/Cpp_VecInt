@@ -15,6 +15,8 @@ struct VecInt {
 		~VecInt();
 
 		bool operator==(const VecInt& rhs);
+		int& operator[](size_t index);
+		const int& operator[](size_t index) const;
 
 		void clear();
 
