@@ -123,7 +123,7 @@ void VecInt::print() const {
     std::cout << std::endl;
 }
 
-bool VecInt::operator==(const VecInt& rhs) {
+bool VecInt::operator==(const VecInt& rhs) const {
     if (m_size != rhs.m_size)
         return false;
     for (int i = 0; i < m_size; ++i) {

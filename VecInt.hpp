@@ -14,7 +14,7 @@ struct VecInt {
 		VecInt& operator=(VecInt&& rhs) noexcept;
 		~VecInt();
 
-		bool operator==(const VecInt& rhs);
+		bool operator==(const VecInt& rhs) const;
 		int& operator[](size_t index);
 		const int& operator[](size_t index) const;
 
